@@ -420,10 +420,10 @@ USB <- {
 
         // A list of drivers assigned to this device
         // There can be more than one driver for composite device
-        _driverInstances = [];
+        _driverInstances = null;
 
         // Endpoints instances for this device. Required for quick search from transfer event processor
-        _endpoints = {};
+        _endpoints = null;
 
         // Device speed
         _speed = null;
@@ -450,6 +450,7 @@ USB <- {
             local conf = deviceDescriptor.configurations[0];
             _interfaces = conf.interfaces;
             _driverInstances = [];
+            _endpoints = {};
 
             local ep0 = USB.ControlEndpoint(this, 0, _desc["maxpacketsize0"]);
             _endpoints[0] <- ep0;
