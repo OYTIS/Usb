@@ -141,7 +141,11 @@ class FT232RLFtdiUsbDriver extends USB.Driver {
                     length -= 2;
                     onComplete(error, data, length);
                 } else {
-                    USB.err("Received too short packet");
+                    local data_hex = "";
+                    for (local i = 0; i < length; i++) {
+                      data_hex += format(" %02X", data[i]);
+                    }
+                    USB.err("Received too short packet:" + data_hex);
                 }
             }
         }.bindenv(this));
